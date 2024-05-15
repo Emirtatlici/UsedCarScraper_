@@ -3,6 +3,8 @@ import pandas as pd
 from pandas import json_normalize
 import logging
 import signal
+import os
+
 
 class CarSearch:
     def __init__(self):
@@ -19,10 +21,7 @@ class CarSearch:
             "sec-fetch-site": "same-origin",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
         }
-        self.columns_to_exclude = ['carfax_one_owner', 'has_free_carfax_report', 'first_image_url', 'external_listing_url', 
-                                    'unique_id', 'detail_button_text', 'vin', 'dealer_phone', 'dealer_name', 'carfax_url', 
-                                    'primary_category_rank', 'primary_category_name', 'primary_category_url', 'review_url', 
-                                    'detail_url', 'carfax_token', 'carfax_free_report']  
+        self.columns_to_exclude = os.getenv("EXCLUDED_COLUMNS").split(",") if os.getenv("EXCLUDED_COLUMNS") else [] 
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         self.exit_gracefully = False  
