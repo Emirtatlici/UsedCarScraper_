@@ -81,3 +81,10 @@ class CarSearch:
             self.logger.error(f"An error occurred: {e}")
         finally:
             return self.data  
+
+    def save_to_excel(self, file_path):
+        try:
+            self.data.to_excel(file_path, index=False)
+            self.logger.info(f"Data saved to {file_path}")
+        except Exception as e:
+            self.logger.error(f"An error occurred while saving data to Excel: {e}")
