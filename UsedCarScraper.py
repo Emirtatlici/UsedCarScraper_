@@ -41,7 +41,6 @@ class CarSearch:
             year_max = input("Maximum year: ")
             zip_code = input("ZIP Code (press Enter to use default '90001'): ") or "90001"
             
-            # Print entered parameters
             print("\nEntered search parameters:")
             print(f"Page number: {pagenumber}")
             print(f"Maximum price: {price_max}")
@@ -69,7 +68,6 @@ class CarSearch:
                 temp = response.json()
                 normalize = json_normalize(temp["data"]["listings"])
                 
-                # Exclude specified columns
                 normalize = normalize.drop(columns=self.columns_to_exclude, errors='ignore')
                 
                 if not self.data.empty:
