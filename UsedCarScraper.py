@@ -40,20 +40,25 @@ class CarSearch:
             year_min = input("Minimum year: ")
             year_max = input("Maximum year: ")
             zip_code = input("ZIP Code (press Enter to use default '90001'): ") or "90001"
-            
+            car_brand = input("Name of the Brand: ")
+            body_style = input("Body Style of the car:(SUV,Sedan,Coupe,Truck,Convertible,Wagon,Van) ")
+
             print("\nEntered search parameters:")
-            print(f"Page number: {pagenumber}")
+            print(f"Number of Pages: {pagenumber}")
+            print(f"Brand Name:{car_brand}")
+            print(f"Body Style: {body_style}")
             print(f"Maximum price: {price_max}")
             print(f"Maximum mileage: {mileage_max}")
             print(f"Minimum year: {year_min}")
             print(f"Maximum year: {year_max}")
             print(f"ZIP Code: {zip_code}\n")
+        
             
             print("Searching...\n")
             
             for page in range(1, pagenumber + 1):
                 querystring = {
-                    "range": "50",
+                    "range": "200",
                     "price_max": price_max,
                     "mileage_max": mileage_max,
                     "used_checked": "1",
@@ -61,7 +66,9 @@ class CarSearch:
                     "year_min": year_min,
                     "year_max": year_max,
                     "sort": "0",
-                    "page": page
+                    "page": page,
+                    "body_style":body_style,
+                    "make":car_brand
                 }
                 response = requests.get(self.base_url, headers=self.headers, params=querystring, timeout=10)  
                 response.raise_for_status()  
